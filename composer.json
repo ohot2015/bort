@@ -1,0 +1,18 @@
+{
+    "name": "banel1ng/bort.local",
+    "type": "project",
+    "license": "APACHE2",
+    "authors": [
+        {
+            "name": "banel1ng",
+            "email": "ohot2015@gmail.com"
+        }
+    ],
+    "require": {
+        "symfony/yaml": "^3.4",
+        "twig/twig": "^2.0"
+    },
+    "require-dev": {
+        "symfony/var-dumper": "^3.4"
+    }
+}

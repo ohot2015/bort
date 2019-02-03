@@ -1,0 +1,16 @@
+users:
+    user1: { user_login: admin@admin.ad, user_password: admin, user_hash: d328271daf33e8de4dc01a5fa8d2dc7b }
+data_landing:
+    bay_WMR: '0.95'
+    bay_WMZ: '55.7'
+    sale_WMR: '1'
+    sale_WMZ: '58.9'
+    phone: '+7 927 8833-194'
+    short_phone: 333-194
+    WMID: '466958788856'
+    WMZ: Z793756883345
+    WMR: R259828383050
+    min_commission: '100'
+    address: 'Магазин «Магистраль», г. Йошкар-Ола, ул. Первомайская, 76'
+    operation_mode: 'с 9:00 до 18:00'
+    lunch_break: 'обед c 12:30 до 13:30'
