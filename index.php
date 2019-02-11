@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="index, follow">
-    <meta name="author" content="Deep-web, deepwebstudi@gmail.com">
     <meta property="og:url" content="https://site.ru">
     <meta property="og:title" content="">
     <meta property="og:image" content="assets/images/og/og-images.jpg">
@@ -18,9 +17,10 @@
     <link rel="canonical" href="https://site.ru">
     <title>Тайтл сайта</title>
     <link href="favicon.ico" rel="shortcut icon" type="image/x-icon">
+    <link rel="stylesheet" href="./assets/css/vendor.min.css">
+    <link rel="stylesheet" href="./assets/css/common.min.css">
   </head>
   <body>
-  <div id="app">
     <main class="wrapper">
       <header class="header">
         <div class="header__content">
@@ -29,8 +29,7 @@
               <div class="hero__logo"><img class="hero__img" src="/assets/images/header/header_logo-mart.png" alt="Logo-mart"></div>
             </div>
             <div class="header__right">
-              <div class="header__tel">
-                  <a class="header__phone" :href="cleanPhone">{{data_landing.phone}}</a><a class="header__phone-mob" href="tel:333194"><span>(в Йошкар-Оле)</span>{{data_landing.short_phone}}</a></div>
+              <div class="header__tel"><a class="header__phone"  :href="cleanPhone">{{data_landing.phone}}</a><a class="header__phone-mob" href="tel:333194"><span>(в Йошкар-Оле)</span>{{data_landing.short_phone}}</a></div>
               <div class="header__socials"><a class="socials-link" href="#">vk</a></div>
             </div>
           </div>
@@ -39,10 +38,11 @@
       <section class="hero">
         <div class="hero__content">
           <div class="hero__head">
+            <div class="hero__head-name">Реквизиты:</div>
             <ul class="hero__head-list">
               <li class="hero__head-item">
                 <div class="hero__head-icon"></div>
-                <div class="hero__head-desc"><span>Реквизиты</span>Wmid {{data_landing.WMID}}</div>
+                <div class="hero__head-desc">Wmid {{data_landing.WMID}}</div>
               </li>
               <li class="hero__head-item">
                 <div class="hero__head-icon"></div>
@@ -54,34 +54,54 @@
               </li>
             </ul>
           </div>
-          <div class="hero__body">
+        </div>
+        <div class="hero__body">
+          <div class="hero__content">
             <ul class="hero__list">
-              <li class="hero__item hero__item-red">
-                <h2 class="hero__title">Покупаем</h2>
-                <h3 class="hero__mini-title">1 WMR - {{data_landing.bay_WMR}} руб</h3>
-                <h3 class="hero__mini-title">1 WMZ - {{data_landing.bay_WMZ}} руб</h3>
-                <div class="hero__elem">
-                  <div class="hero__elem-text">Вы отдадите</div>
-                  <input class="hero__elem-inp" type="text">
-                  <input class="hero__elem-inp hero__elem-mini" type="text">
-                </div>
-                <div class="hero__elem">
-                  <div class="hero__elem-text">Вы получите</div>
-                  <input class="hero__elem-inp" type="text"><span class="hero__elem-text">рублей</span>
+              <li class="hero__item">
+                <div class="hero__item-wrap">
+                  <h2 class="hero__title">Покупаем</h2>
+                  <h3 class="hero__mini-title">1 WMR - {{data_landing.bay_WMR}} руб</h3>
+                  <h3 class="hero__mini-title">1 WMZ - {{data_landing.bay_WMZ}} руб</h3>
+                  <div class="hero__elem">
+                    <div class="hero__elem-text">Вы отдадите</div>
+                    <div class="hero__elem-wrap">
+                      <input class="hero__elem-inp" type="text">
+                      <select class="hero__elem-mini">
+                        <option class="label" value="">WMR</option>
+                        <option value="1">WMZ</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="hero__elem">
+                    <div class="hero__elem-text">Вы получите</div>
+                    <div class="hero__elem-wrap">
+                      <input class="hero__elem-inp" type="text"><span class="hero__elem-text hero__elem-text_mini">рублей</span>
+                    </div>
+                  </div>
                 </div>
               </li>
-              <li class="hero__item hero__item-lightblue">
-                <h2 class="hero__title">Продаём</h2>
-                <h3 class="hero__mini-title">1 WMR - {{data_landing.sale_WMR}} руб</h3>
-                <h3 class="hero__mini-title">1 WMZ - {{data_landing.sale_WMZ}} руб</h3>
-                <div class="hero__elem">
-                  <div class="hero__elem-text">Вы отдадите</div>
-                  <input class="hero__elem-inp" type="text"><span class="hero__elem-text">рублей</span>
-                </div>
-                <div class="hero__elem">
-                  <div class="hero__elem-text">Вы получите</div>
-                  <input class="hero__elem-inp" type="text">
-                  <input class="hero__elem-inp hero__elem-mini" type="text">
+              <li class="hero__item">
+                <div class="hero__item-wrap">
+                  <h2 class="hero__title">Продаём</h2>
+                  <h3 class="hero__mini-title">1 WMR - {{data_landing.sale_WMR}} руб</h3>
+                  <h3 class="hero__mini-title">1 WMZ - {{data_landing.sale_WMZ}} руб</h3>
+                  <div class="hero__elem">
+                    <div class="hero__elem-text">Вы отдадите</div>
+                    <div class="hero__elem-wrap">
+                      <input class="hero__elem-inp" type="text"><span class="hero__elem-text hero__elem-text_mini">рублей</span>
+                    </div>
+                  </div>
+                  <div class="hero__elem">
+                    <div class="hero__elem-text">Вы получите</div>
+                    <div class="hero__elem-wrap">
+                      <input class="hero__elem-inp" type="text">
+                      <select class="hero__elem-mini">
+                        <option class="label" value="">WMR</option>
+                        <option value="1">WMZ</option>
+                      </select>
+                    </div>
+                  </div>
                 </div>
               </li>
             </ul>
@@ -177,13 +197,10 @@
         </div>
       </div>
     </footer>
-    <link rel="stylesheet" href="./assets/css/vendor.min.css">
-    <link rel="stylesheet" href="./assets/css/common.min.css">
-  </div>
-  </body>
-  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.22/dist/vue.js"></script>
-
-  <script>
+    <script src="./assets/js/vendor.min.js"></script>
+    <script src="./assets/js/common.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.22/dist/vue.js"></script>
+    <script>
       var app = new Vue({
           el: '#app',
           data: {
@@ -209,4 +226,5 @@
           }
       })
   </script>
+  </body>
 </html>
