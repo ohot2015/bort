@@ -15,12 +15,13 @@
     <meta property="og:description" content="">
     <meta property="og:site_name" content="Site-name">
     <link rel="canonical" href="https://site.ru">
-    <title>Тайтл сайта</title>
+    <title>MART</title>
     <link href="favicon.ico" rel="shortcut icon" type="image/x-icon">
     <link rel="stylesheet" href="./assets/css/vendor.min.css">
     <link rel="stylesheet" href="./assets/css/common.min.css">
   </head>
   <body>
+    <div id="app">
     <main class="wrapper">
       <header class="header">
         <div class="header__content">
@@ -66,17 +67,17 @@
                   <div class="hero__elem">
                     <div class="hero__elem-text">Вы отдадите</div>
                     <div class="hero__elem-wrap">
-                      <input class="hero__elem-inp" type="text">
-                      <select class="hero__elem-mini">
-                        <option class="label" value="">WMR</option>
-                        <option value="1">WMZ</option>
+                      <input class="hero__elem-inp" v-model="buy" type="text">
+                      <select class="hero__elem-mini" v-model="currency">
+                        <option class="label" selected value="0">WMR</option>
+                        <option value="2" selected>WMZ</option>
                       </select>
                     </div>
                   </div>
                   <div class="hero__elem">
                     <div class="hero__elem-text">Вы получите</div>
                     <div class="hero__elem-wrap">
-                      <input class="hero__elem-inp" type="text"><span class="hero__elem-text hero__elem-text_mini">рублей</span>
+                      <input class="hero__elem-inp"  :value="buy2|toCurrency" type="text"><span class="hero__elem-text hero__elem-text_mini">рублей</span>
                     </div>
                   </div>
                 </div>
@@ -89,16 +90,16 @@
                   <div class="hero__elem">
                     <div class="hero__elem-text">Вы отдадите</div>
                     <div class="hero__elem-wrap">
-                      <input class="hero__elem-inp" type="text"><span class="hero__elem-text hero__elem-text_mini">рублей</span>
+                      <input class="hero__elem-inp" v-model="sell" type="text"><span class="hero__elem-text hero__elem-text_mini">рублей</span>
                     </div>
                   </div>
                   <div class="hero__elem">
                     <div class="hero__elem-text">Вы получите</div>
                     <div class="hero__elem-wrap">
-                      <input class="hero__elem-inp" type="text">
-                      <select class="hero__elem-mini">
-                        <option class="label" value="">WMR</option>
-                        <option value="1">WMZ</option>
+                      <input class="hero__elem-inp" :value="sell2|toCurrency" type="text">
+                      <select class="hero__elem-mini" v-model="currency2" >
+                        <option class="label" selected value="0">WMR</option>
+                        <option value="2">WMZ</option>
                       </select>
                     </div>
                   </div>
@@ -151,7 +152,7 @@
                     <p>Мы оказываем услуги по обмену WMZ и WMR на наличные и наоборот</p>
                     <p>Мы дорожим своей репутацией и заинтересованы в длительном сотрудничестве</p>
                     <p>Мы ни при каких обстоятельствах не сообщаем информацию о клиентах и их операциях третьим лицам, за исключением сотрудников WebMoney</p>
-                    <p>Мы гарантируем простоту, скорость и надежность обмена.466958788856Аттестат WebMoney Transfer — гарантия успешной работы с нами</p>
+                    <p>Мы гарантируем простоту, скорость и надежность обмена. 466958788856 Аттестат WebMoney Transfer — гарантия успешной работы с нами</p>
                   </article>
                 </li>
               </ul>
@@ -197,23 +198,59 @@
         </div>
       </div>
     </footer>
+    </div>
     <script src="./assets/js/vendor.min.js"></script>
     <script src="./assets/js/common.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.22/dist/vue.js"></script>
     <script>
-      var app = new Vue({
+        Vue.filter('toCurrency', function (value) {
+            if (typeof value !== "number" ) {
+                return value;
+            }
+            var formatter = new Intl.NumberFormat('ru', {
+//                style: 'currency',
+//                currency: 'RUB',
+                minimumFractionDigits: 0
+            });
+            return formatter.format(value);
+        });
+
+      new Vue({
           el: '#app',
           data: {
-              data_landing:{}
+              data_landing:{},
+              buy:'',
+              sell:'',
+              currency:0,
+              currency2:0,
           },
           computed:{
-              cleanPhone(){
-                  if (this.data_landing.phone) {
-                      return 'tel:'+this.data_landing.phone.replace(/[-+()\s]/g,'')
+              buy2() {
+                let factor;
+                if (this.currency == 0 ){
+                    factor = this.data_landing.bay_WMR
+                }else if (this.currency == 2){
+                    factor = this.data_landing.bay_WMZ
+                }
+              return this.buy * factor;
+            },
+              sell2() {
+                  let factor;
+                  if (this.currency2 == 0 ){
+                      factor = this.data_landing.sale_WMR
+                  }else if (this.currency2 == 2){
+                      factor = this.data_landing.sale_WMZ
                   }
-                  return ''
+                  return this.sell * factor;
+              },
+            cleanPhone() {
+              if (this.data_landing.phone) {
+                  return 'tel:'+this.data_landing.phone.replace(/[-+()\s]/g,'')
               }
+              return '';
+            }
           },
+
           created() {
               fetch("/ajax.php")
                   .then((res)=> {
@@ -225,6 +262,7 @@
 
           }
       })
+
   </script>
   </body>
 </html>
