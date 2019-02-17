@@ -1,7 +1,8 @@
 users:
-    user1: { user_login: admin@admin.ad, user_password: admin, user_hash: d328271daf33e8de4dc01a5fa8d2dc7b }
+    - 17493517
+    - 319161134
 data_landing:
-    bay_WMR: '0.95'
+    bay_WMR: '0.96'
     bay_WMZ: '55.7'
     sale_WMR: '1'
     sale_WMZ: '58.9'
