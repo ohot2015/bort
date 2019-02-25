@@ -29,7 +29,7 @@
             </div>
             <div class="header__right">
               <div class="header__tel"><a class="header__phone" :href="cleanPhone">{{data_landing.phone}}</a><a class="header__phone-mob" href="tel:333194"><span>(в Йошкар-Оле)</span>{{data_landing.short_phone}}</a></div>
-              <div class="header__socials"><a class="socials-link" href="#">vk</a></div>
+              <div class="header__socials"><a class="socials-link" href="https://vk.com/club50215615">vk</a></div>
             </div>
           </div>
         </div>
@@ -65,10 +65,10 @@
                   <div class="hero__elem">
                     <div class="hero__elem-text">Вы отдадите</div>
                     <div class="hero__elem-wrap">
-                      <input class="hero__elem-inp" v-model="buy" type="text">
+                      <input class="hero__elem-inp" v-model="buy" type="text" value="0">
                       <select class="SlectBox first" v-model="currency" >
-                        <option class="label" value="">WMR</option>
-                        <option value="1">WMZ</option>
+                        <option class="label" selected value="1">WMR</option>
+                        <option value="2">WMZ</option>
                       </select>
                     </div>
                   </div>
@@ -96,8 +96,8 @@
                     <div class="hero__elem-wrap">
                       <input class="hero__elem-inp" :value="sell2|toCurrency" type="text">
                       <select class="SlectBox second"  v-model="currency2">
-                        <option class="label" value="">WMR</option>
-                        <option value="1">WMZ</option>
+                        <option class="label" selected="true"  value="1">WMR</option>
+                        <option value="2">WMZ</option>
                       </select>
                     </div>
                   </div>
@@ -204,7 +204,17 @@
                       zoom="16.55"
                       style="height: 600px; max-width: 100%;"
                       @map-was-initialized="initHandler"
-              />
+              >
+                  <ymap-marker
+                          marker-id="1"
+                          marker-type="placemark"
+                          hint-content="Hint content 1"
+                          cluster-name="1"
+                          :coords="[56.64944356806829,47.89344599999998]"
+                          :balloon="{header: 'Магазин «Магистраль»'}"
+                          :icon="{color: 'red'}"
+                  ></ymap-marker>
+              </yandex-map>
           </div>
         </div>
       </section>
