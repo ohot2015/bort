@@ -9,7 +9,7 @@ $data = Yaml::parseFile('config.yaml');
 $vk_config = array(
     'app_id'        => '6857044',
     'api_secret'    => 'uaCQPufHXHEksvEoSdYm',
-    'callback_url'  => 'http://bort.local/login.php',
+    'callback_url'  => $data['callback_url'].'/login.php',
     'api_settings'  => 'friends' // In this example use 'friends'.
     // If you need infinite token use key 'offline'.
 );

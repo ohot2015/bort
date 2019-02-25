@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="index, follow">
-            <meta property="og:url" content="https://site.ru">
+    <meta property="og:url" content="https://site.ru">
     <meta property="og:title" content="">
     <meta property="og:image" content="assets/images/og/og-images.jpg">
     <meta property="og:image:type" content="image/jpeg">
@@ -15,7 +15,7 @@
     <meta property="og:description" content="">
     <meta property="og:site_name" content="Site-name">
     <link rel="canonical" href="https://site.ru">
-    <title>MART</title>
+    <title>MyWebmoney</title>
     <link href="favicon.ico" rel="shortcut icon" type="image/x-icon">
   </head>
   <body>
@@ -25,7 +25,7 @@
         <div class="header__content">
           <div class="header__wrap">
             <div class="header__left">
-              <div class="hero__logo"><img class="hero__img" src="/assets/images/header/header_logo-mart.png" alt="Logo-mart"></div>
+              <div class="hero__logo"><img class="hero__img" src="/assets/images/header/logoMWM.png" alt="Logo-mart"></div>
             </div>
             <div class="header__right">
               <div class="header__tel"><a class="header__phone" :href="cleanPhone">{{data_landing.phone}}</a><a class="header__phone-mob" href="tel:333194"><span>(в Йошкар-Оле)</span>{{data_landing.short_phone}}</a></div>
@@ -40,16 +40,19 @@
             <div class="hero__head-name">Реквизиты:</div>
             <ul class="hero__head-list">
               <li class="hero__head-item">
-                <div class="hero__head-icon"></div>
-                <div class="hero__head-desc">Wmid {{data_landing.WMID}}</div>
+                <div class="hero__head-icon" @click="wmid"></div>
+                  <input class="custom-wmid" ref="inp1" :value="data_landing.WMID" >
+                <div class="hero__head-desc" @click="wmid" >Wmid {{data_landing.WMID}}</div>
               </li>
               <li class="hero__head-item">
-                <div class="hero__head-icon"></div>
-                <div class="hero__head-desc">{{data_landing.WMZ}}</div>
+                <div class="hero__head-icon" @click="wmz"></div>
+                  <input class="custom-wmid" ref="inp2" :value="data_landing.WMZ" >
+                <div class="hero__head-desc" @click="wmz">{{data_landing.WMZ}}</div>
               </li>
               <li class="hero__head-item">
-                <div class="hero__head-icon"></div>
-                <div class="hero__head-desc">{{data_landing.WMR}}</div>
+                <div class="hero__head-icon" @click="wmr"></div>
+                  <input class="custom-wmid" ref="inp3" :value="data_landing.WMR" >
+                <div class="hero__head-desc" @click="wmr">{{data_landing.WMR}}</div>
               </li>
             </ul>
           </div>
@@ -60,12 +63,12 @@
               <li class="hero__item hero__item_red">
                 <div class="hero__item-wrap">
                   <h2 class="hero__title">Покупаем</h2>
-                  <h3 class="hero__mini-title">1 WMR - {{data_landing.bay_WMR}} руб</h3>
-                  <h3 class="hero__mini-title">1 WMZ - {{data_landing.bay_WMZ}} руб</h3>
+                  <h3 class="hero__mini-title">1 WMR - {{data_landing.buy_WMR}} руб</h3>
+                  <h3 class="hero__mini-title">1 WMZ - {{data_landing.buy_WMZ}} руб</h3>
                   <div class="hero__elem">
                     <div class="hero__elem-text">Вы отдадите</div>
                     <div class="hero__elem-wrap">
-                      <input class="hero__elem-inp" v-model="buy" type="text" value="0">
+                      <input class="hero__elem-inp" v-model="buy" ref="buy" type="text" >
                       <select class="SlectBox first" v-model="currency" >
                         <option class="label" selected value="1">WMR</option>
                         <option value="2">WMZ</option>
@@ -75,7 +78,7 @@
                   <div class="hero__elem">
                     <div class="hero__elem-text">Вы получите</div>
                     <div class="hero__elem-wrap">
-                      <input class="hero__elem-inp" :value="buy2|toCurrency" type="text"><span class="hero__elem-text hero__elem-text_mini">рублей</span>
+                      <input class="hero__elem-inp" :value="buy2|toCurrency" @keyup="inputBuy" type="text"><span class="hero__elem-text hero__elem-text_mini">рублей</span>
                     </div>
                   </div>
                 </div>
@@ -88,13 +91,13 @@
                   <div class="hero__elem">
                     <div class="hero__elem-text">Вы отдадите</div>
                     <div class="hero__elem-wrap">
-                      <input class="hero__elem-inp" v-model="sell" type="text"><span class="hero__elem-text hero__elem-text_mini">рублей</span>
+                      <input class="hero__elem-inp" v-model="sell" ref="buy2" type="text"><span class="hero__elem-text hero__elem-text_mini">рублей</span>
                     </div>
                   </div>
                   <div class="hero__elem">
                     <div class="hero__elem-text">Вы получите</div>
                     <div class="hero__elem-wrap">
-                      <input class="hero__elem-inp" :value="sell2|toCurrency" type="text">
+                      <input class="hero__elem-inp" :value="sell2|toCurrency"  @keyup="inputBuy2" type="text">
                       <select class="SlectBox second"  v-model="currency2">
                         <option class="label" selected="true"  value="1">WMR</option>
                         <option value="2">WMZ</option>
@@ -221,10 +224,10 @@
     </main>
     <footer class="footer">
       <div class="footer__content">
-        <div class="footer__logo"><img class="footer__logo-img" src="/assets/images/footer/footer_logo-mart.png" alt="Logo-Mart"></div>
+        <div class="footer__logo"><img class="footer__logo-img" src="/assets/images/header/logoMWM.png" alt="Logo-Mart"></div>
         <div class="footer__copyrights">
           <p>Ввод и вывод электронных валют</p>
-          <p>wmmart.ru 2019</p>
+          <p>mywebmoney.ru 2019</p>
         </div>
       </div>
     </footer>
@@ -232,8 +235,19 @@
     <link rel="stylesheet" href="./assets/css/vendor.min.css">
     <link rel="stylesheet" href="./assets/css/common.min.css">
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.22/dist/vue.js"></script>
+
   <script src="./assets/js/yandex.js"></script>
   <script src="./assets/js/vendor.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
     <script src="./assets/js/common.min.js"></script>
   </body>
+  <style>
+      .custom-wmid {
+          width:10px;
+          height:1px;
+          position: absolute;
+          top:0;
+          opacity: 0.01;
+      }
+  </style>
 </html>
